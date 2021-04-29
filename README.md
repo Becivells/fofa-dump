@@ -38,3 +38,7 @@ optional arguments:
 python fofa_dump.py -q 'app="Solr"'
 ```
 
+```shell script
+fsfile=$(python3 fofa_dump.py -q 'app="Solr"' 2>&1|egrep -o "\d+\.csv")
+httpx -l <(awk -F "," 'NR>1{print $2}' $fsfile) -title -content-length -status-code -silent
+```
