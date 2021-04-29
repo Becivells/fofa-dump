@@ -8,7 +8,6 @@ import sys
 import time
 import json
 import base64
-import traceback
 import os
 import argparse
 import csv
@@ -20,10 +19,14 @@ logger = logging.getLogger(os.path.basename(__file__))
 coloredlogs.install(level='INFO',milliseconds=True,fmt='[%(asctime)s] :%(levelname)s: %(message)s')
 import datx
 c = datx.City('mydata4vipday3.datx')
-# FOFA 用户名
-fofa_name = ''
-# FOFA 用户key
-fofa_key = ''
+
+# .fofaconfig
+# fofa_name
+# fofa_key
+config = open(os.path.expanduser("~")+"/.fofaconfig").read().strip()
+fofa_name, fofa_key = config.split("\n")
+
+
 session = requests.session()
 # 请求头
 headers = {
